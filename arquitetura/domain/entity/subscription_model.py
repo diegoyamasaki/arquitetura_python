@@ -6,6 +6,7 @@ from sqlalchemy import Column, Integer, String, DATETIME, FLOAT
 class SubscriptionModel(settings.DBModel):
     __tablename__ = "subscription"
 
+    id: int = Column(Integer, primary_key=True, autoincrement=True)
     user_document: str = Column(String)
     subscription_id: str = Column(String)
     purchase_at: datetime = Column(DATETIME)
