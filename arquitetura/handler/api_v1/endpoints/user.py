@@ -3,7 +3,6 @@ from arquitetura.shared.dependencies import get_db
 from arquitetura.application.user import UserApplcation
 from fastapi import APIRouter, Depends, status, Response
 from arquitetura.infra.schema.user import UserSchemaCreate, UserSchemaUpdate
-from arquitetura.infra.repository import Repository
 from arquitetura.infra.repository.user_repository import UserRepository
 
 user_route = APIRouter()
@@ -13,7 +12,7 @@ user_route = APIRouter()
 def users(
         application: UserApplcation = Depends(UserApplcation),
         db: Session = Depends(get_db),
-        repository: Repository = Depends(UserRepository)):
+        repository: UserRepository = Depends(UserRepository)):
     return application.get_all(db, repository)
 
 
@@ -21,7 +20,7 @@ def users(
 def post_user(
         data: UserSchemaCreate, application: UserApplcation = Depends(UserApplcation),
         db: Session = Depends(get_db),
-        repository: Repository = Depends(UserRepository)):
+        repository: UserRepository = Depends(UserRepository)):
     user = application.create(data, db, repository)
     return user
 
@@ -31,7 +30,7 @@ def put_user(
         user_id: str,
         data: UserSchemaUpdate, application: UserApplcation = Depends(UserApplcation),
         db: Session = Depends(get_db),
-        repository: Repository = Depends(UserRepository)):
+        repository: UserRepository = Depends(UserRepository)):
     user = application.update(user_id, data, db, repository)
     return user
 
@@ -41,6 +40,6 @@ def delete_user(
         user_id: str,
         user_application: UserApplcation = Depends(UserApplcation),
         db: Session = Depends(get_db),
-        repository: Repository = Depends(UserRepository)):
+        repository: UserRepository = Depends(UserRepository)):
     user_application.delete(user_id, db, repository)
     return Response(status_code=status.HTTP_204_NO_CONTENT)

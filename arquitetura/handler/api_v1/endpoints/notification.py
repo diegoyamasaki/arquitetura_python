@@ -3,8 +3,7 @@ from arquitetura.shared.dependencies import get_db
 from fastapi import APIRouter, Depends, status, Response
 from arquitetura.application.notification import NotificationApplication
 from arquitetura.infra.schema.notification import NotificationSchemaBase
-from arquitetura.infra.repository import Repository
-from arquitetura.infra.repository.user_repository import UserRepository
+from arquitetura.infra.repository.notification_repository import NotificationRepository
 
 notification_route = APIRouter()
 
@@ -13,7 +12,7 @@ notification_route = APIRouter()
 def notifications(
         application: NotificationApplication = Depends(NotificationApplication),
         db: Session = Depends(get_db),
-        repository: Repository = Depends(UserRepository)):
+        repository: NotificationRepository = Depends(NotificationRepository)):
     return application.get_all(db, repository)
 
 
@@ -21,7 +20,7 @@ def notifications(
 def post_notification(
         data: NotificationSchemaBase,
         application: NotificationApplication = Depends(NotificationApplication),
-        db: Session = Depends(get_db), repository: Repository = Depends(UserRepository)):
+        db: Session = Depends(get_db), repository: NotificationRepository = Depends(NotificationRepository)):
     user = application.create(data, db, repository)
     return user
 
@@ -31,6 +30,6 @@ def delete_notification(
         notification_id: str,
         application: NotificationApplication = Depends(NotificationApplication),
         db: Session = Depends(get_db),
-        repository: Repository = Depends(UserRepository)):
+        repository: NotificationRepository = Depends(NotificationRepository)):
     application.delete(notification_id, db, repository)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
