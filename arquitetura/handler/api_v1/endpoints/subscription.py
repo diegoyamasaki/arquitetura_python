@@ -22,8 +22,7 @@ def post_subscription(
         application: SubscriptipnApplication = Depends(SubscriptipnApplication),
         db: Session = Depends(get_db),
         repository: SubscriptionRepository = Depends(SubscriptionRepository)):
-    user = application.create(data, db, repository)
-    return user
+    return application.create(data, db, repository)
 
 
 @subscription_route.put('/{subscription_id}', status_code=status.HTTP_201_CREATED)
@@ -32,8 +31,7 @@ def put_subscription(
         application: SubscriptipnApplication = Depends(SubscriptipnApplication),
         db: Session = Depends(get_db),
         repository: SubscriptionRepository = Depends(SubscriptionRepository)):
-    user = application.update(subscription_id, data, db, repository)
-    return user
+    return application.update(subscription_id, data, db, repository)
 
 
 @subscription_route.delete('/{subscription_id}', status_code=status.HTTP_201_CREATED)

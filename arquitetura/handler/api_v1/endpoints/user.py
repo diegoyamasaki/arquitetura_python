@@ -18,28 +18,28 @@ def users(
 
 @user_route.post('/', status_code=status.HTTP_201_CREATED)
 def post_user(
-        data: UserSchemaCreate, application: UserApplcation = Depends(UserApplcation),
+        data: UserSchemaCreate,
+        application: UserApplcation = Depends(UserApplcation),
         db: Session = Depends(get_db),
         repository: UserRepository = Depends(UserRepository)):
-    user = application.create(data, db, repository)
-    return user
+    return application.create(data, db, repository)
 
 
 @user_route.put('/{user_id}', status_code=status.HTTP_201_CREATED)
 def put_user(
         user_id: str,
-        data: UserSchemaUpdate, application: UserApplcation = Depends(UserApplcation),
+        data: UserSchemaUpdate,
+        application: UserApplcation = Depends(UserApplcation),
         db: Session = Depends(get_db),
         repository: UserRepository = Depends(UserRepository)):
-    user = application.update(user_id, data, db, repository)
-    return user
+    return application.update(user_id, data, db, repository)
 
 
 @user_route.delete('/{user_id}', status_code=status.HTTP_201_CREATED)
 def delete_user(
         user_id: str,
-        user_application: UserApplcation = Depends(UserApplcation),
+        application: UserApplcation = Depends(UserApplcation),
         db: Session = Depends(get_db),
         repository: UserRepository = Depends(UserRepository)):
-    user_application.delete(user_id, db, repository)
+    application.delete(user_id, db, repository)
     return Response(status_code=status.HTTP_204_NO_CONTENT)

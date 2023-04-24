@@ -21,8 +21,7 @@ def post_notification(
         data: NotificationSchemaBase,
         application: NotificationApplication = Depends(NotificationApplication),
         db: Session = Depends(get_db), repository: NotificationRepository = Depends(NotificationRepository)):
-    user = application.create(data, db, repository)
-    return user
+    return application.create(data, db, repository)
 
 
 @notification_route.delete('/{notification_id}', status_code=status.HTTP_201_CREATED)
