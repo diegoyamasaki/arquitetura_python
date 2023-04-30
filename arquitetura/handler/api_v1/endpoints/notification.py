@@ -1,6 +1,9 @@
+from sqlalchemy.orm import Session
+from arquitetura.shared.dependencies import get_db
 from fastapi import APIRouter, Depends, status, Response
 from arquitetura.application.notification import NotificationApplication
 from arquitetura.infra.schema.notification import NotificationSchemaBase
+from arquitetura.infra.repository.notification_repository import NotificationRepository
 
 notification_route = APIRouter()
 
@@ -21,12 +24,11 @@ def post_notification(
     return user
 
 
-@notification_route.delete(
-    '/{notification_id}',
-    status_code=status.HTTP_201_CREATED)
+@notification_route.delete('/{notification_id}', status_code=status.HTTP_201_CREATED)
 def delete_notification(
         notification_id: str,
-        application: NotificationApplication
-        = Depends(NotificationApplication)):
-    application.delete(notification_id)
+        application: NotificationApplication = Depends(NotificationApplication),
+        db: Session = Depends(get_db),
+        repository: NotificationRepository = Depends(NotificationRepository)):
+    application.delete(notification_id, db, repository)
     return Response(status_code=status.HTTP_204_NO_CONTENT)

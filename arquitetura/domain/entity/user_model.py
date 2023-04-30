@@ -5,7 +5,8 @@ from arquitetura.shared.config import settings
 
 class UserModel(settings.DBModel):
     __tablename__ = 'user'
-    document: str = Column(String, primary_key=True)
+    id: int = Column(Integer, primary_key=True, autoincrement=True)
+    document: str = Column(String)
     name: str = Column(String)
     surname: str = Column(String)
     email: str = Column(String)
