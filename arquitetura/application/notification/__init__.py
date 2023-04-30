@@ -1,9 +1,8 @@
 from pydantic import BaseModel
-from  arquitetura.application import Application
+from arquitetura.application import Application
 
 
 class NotificationApplication(Application):
-
     def create(self, data: BaseModel):
         pass
 

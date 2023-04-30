@@ -6,16 +6,16 @@ class Application(metaclass=ABCMeta):
 
     @abstractmethod
     def create(self, data: BaseModel):
-        raise NotImplemented
+        raise NotImplementedError
 
     @abstractmethod
     def update(self, id: str, data: BaseModel):
-        raise NotImplemented
+        raise NotImplementedError
 
     @abstractmethod
     def delete(self, id: str):
-        raise NotImplemented
+        raise NotImplementedError
 
     @abstractmethod
     def get_all(self):
-        raise NotImplemented
+        raise NotImplementedError

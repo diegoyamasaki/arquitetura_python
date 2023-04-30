@@ -14,4 +14,3 @@ class UserModel(settings.DBModel):
     created_at: datetime = Column(DATETIME)
     updated_at: datetime = Column(DATETIME)
     deleted_at: datetime = Column(DATETIME)
-

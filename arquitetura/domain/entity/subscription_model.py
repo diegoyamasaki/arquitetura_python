@@ -12,4 +12,3 @@ class SubscriptionModel(settings.DBModel):
     purchase_value: float = Column(FLOAT)
     order_number: int = Column(Integer)
     deleted_at: datetime = Column(DATETIME)
-

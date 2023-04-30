@@ -12,4 +12,3 @@ class NotificationModel(settings.DBModel):
     sended: bool = Column(BOOLEAN)
     create_ad: datetime = Column(DATETIME)
     deleted_at: datetime = Column(DATETIME)
-

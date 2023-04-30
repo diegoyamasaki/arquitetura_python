@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from  arquitetura.application import Application
+from arquitetura.application import Application
 
 
 class UserApplcation(Application):

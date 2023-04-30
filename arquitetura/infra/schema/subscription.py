@@ -21,4 +21,3 @@ class SubscriptionSchemaUpdate(SubscriptionSchemaBase):
     user_id: Optional[str]
     value: Optional[int]
     product_name: Optional[str]
-
